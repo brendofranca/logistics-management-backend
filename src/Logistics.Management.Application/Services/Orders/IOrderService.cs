@@ -10,5 +10,7 @@ namespace Logistics.Management.Application.Services.Orders
         Task<OrderResponse> GetOrderById(Guid id, CancellationToken cancellationToken);
 
         Task<bool> InsertOrder(OrderRequest request, CancellationToken cancellationToken);
+
+        Task<bool> ProcessOrder(ProcessOrderRequest request, CancellationToken cancellationToken);
     }
 }

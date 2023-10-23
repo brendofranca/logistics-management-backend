@@ -8,6 +8,8 @@ namespace Logistics.Management.Data.Context.Mappings
     {
         public void Configure(EntityTypeBuilder<AutomatedGuidedVehicle> builder)
         {
+            builder.ToTable("AutomatedGuidedVehicles");
+
             builder.HasIndex(e => e.Name, "IX_AutomatedGuidedVehicles_Name");
 
             builder.Property(e => e.Id).HasDefaultValueSql("(newid())");

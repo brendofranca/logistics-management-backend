@@ -81,5 +81,7 @@ namespace Logistics.Management.Application.Services.Orders
                 return false;
             }
         }
+
+        public Task<bool> ProcessOrder(ProcessOrderRequest request, CancellationToken cancellationToken) => throw new NotImplementedException();
     }
 }

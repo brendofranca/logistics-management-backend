@@ -8,6 +8,8 @@ namespace Logistics.Management.Data.Context.Mappings
     {
         public void Configure(EntityTypeBuilder<OrderItem> builder)
         {
+            builder.ToTable("OrderItems");
+
             builder.HasIndex(e => e.ItemId, "IX_OrderItems_ItemsId");
 
             builder.HasIndex(e => e.OrderId, "IX_OrderItems_OrderId");

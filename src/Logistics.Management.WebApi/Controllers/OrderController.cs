@@ -18,7 +18,7 @@ namespace Logistics.Management.WebApi.Controllers
             Ok(await _orderService.GetAllOrders(cancellationToken));
 
         [HttpGet("{id:guid}")]
-        public async Task<IActionResult> GetRequestById([FromQuery] Guid id, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetRequestById([FromRoute] Guid id, CancellationToken cancellationToken)
         {
             var result = await _orderService.GetOrderById(id, cancellationToken);
 

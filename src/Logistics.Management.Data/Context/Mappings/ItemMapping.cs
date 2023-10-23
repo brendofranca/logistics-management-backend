@@ -9,6 +9,8 @@ namespace Logistics.Management.Data.Context.Mappings
     {
         public void Configure(EntityTypeBuilder<Item> builder)
         {
+            builder.ToTable("Items");
+
             builder.HasIndex(e => e.Name, "IX_Items_Name");
 
             builder.Property(e => e.Id).HasDefaultValueSql("(newid())");

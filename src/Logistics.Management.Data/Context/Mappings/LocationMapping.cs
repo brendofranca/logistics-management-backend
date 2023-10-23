@@ -8,6 +8,8 @@ namespace Logistics.Management.Data.Context.Mappings
     {
         public void Configure(EntityTypeBuilder<Location> builder)
         {
+            builder.ToTable("Locations");
+
             builder.Property(e => e.Id).HasDefaultValueSql("(newid())");
 
             builder.Property(e => e.CreatedAt).HasColumnType("datetime").HasDefaultValueSql("(getdate())");
