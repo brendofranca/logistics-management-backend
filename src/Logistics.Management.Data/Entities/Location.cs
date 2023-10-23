@@ -7,16 +7,21 @@ namespace Logistics.Management.Data.Entities
         public decimal LocationX { get; set; }
         public decimal LocationY { get; set; }
 
-        public virtual ICollection<AutomatedGuidedVehicle> AutomatedGuidedVehicles { get; set; }
-        public virtual ICollection<Good> Goods { get; set; }
+        public virtual ICollection<AutomatedGuidedVehicle>? AutomatedGuidedVehicles { get; set; }
+        public virtual ICollection<Item>? Items { get; set; }
+
+        // EF
+        protected Location()
+        {
+            AutomatedGuidedVehicles = new HashSet<AutomatedGuidedVehicle>();
+            Items = new HashSet<Item>();
+        }
 
         public Location(Guid id, decimal locationX, decimal locationY)
         {
             Id = id;
             LocationX = locationX;
             LocationY = locationY;
-            AutomatedGuidedVehicles = new HashSet<AutomatedGuidedVehicle>();
-            Goods = new HashSet<Good>();
         }
     }
 }

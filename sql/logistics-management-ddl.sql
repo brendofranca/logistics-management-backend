@@ -14,44 +14,44 @@ CREATE TABLE StatusEnum (
     StatusName NVARCHAR(255) NOT NULL
 );
 
-CREATE TABLE RequestStatus (
+CREATE TABLE OrderStatus (
     Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     StatusId INT,
-	RequestId UNIQUEIDENTIFIER,
+	OrderId UNIQUEIDENTIFIER,
     CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
     UpdatedAt DATETIME NULL,
 );
 GO
 
-CREATE TABLE Request (
+CREATE TABLE Orders (
     Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Description NVARCHAR(255) NOT NULL,
-    RequestStatusId UNIQUEIDENTIFIER,
+    OrderStatusId UNIQUEIDENTIFIER,
     CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
     UpdatedAt DATETIME NULL,   
-    INDEX IX_Request_Description (Description)
+    INDEX IX_Order_Description (Description)
 );
 GO
 
-ALTER TABLE RequestStatus
-ADD CONSTRAINT FK_RequestStatus_StatusEnum
+ALTER TABLE OrderStatus
+ADD CONSTRAINT FK_OrderStatus_StatusEnum
 FOREIGN KEY (StatusId)
 REFERENCES StatusEnum(Id);
 GO
 
-ALTER TABLE RequestStatus
-ADD CONSTRAINT FK_RequestStatus_Request
-FOREIGN KEY (RequestId)
-REFERENCES Request(Id);
+ALTER TABLE OrderStatus
+ADD CONSTRAINT FK_OrderStatus_Order
+FOREIGN KEY (OrderId)
+REFERENCES Orders(Id);
 GO
 
-ALTER TABLE Request
-ADD CONSTRAINT FK_Request_RequestStatus
-FOREIGN KEY (RequestStatusId)
-REFERENCES RequestStatus(Id);
+ALTER TABLE Orders
+ADD CONSTRAINT FK_Orders_OrderStatus
+FOREIGN KEY (OrderStatusId)
+REFERENCES OrderStatus(Id);
 GO
 
-CREATE TABLE Location (
+CREATE TABLE Locations (
     Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     LocationX DECIMAL(10, 2) NOT NULL,
     LocationY DECIMAL(10, 2) NOT NULL,
@@ -60,40 +60,40 @@ CREATE TABLE Location (
 );
 GO
 
-CREATE TABLE Good (
+CREATE TABLE Items (
     Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Name NVARCHAR(255) NOT NULL,
     LocationId UNIQUEIDENTIFIER,
     Quantity INT NOT NULL,
     CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
     UpdatedAt DATETIME NULL,
-    FOREIGN KEY (LocationId) REFERENCES Location(Id),
-    INDEX IX_Good_Name (Name)
+    FOREIGN KEY (LocationId) REFERENCES Locations(Id),
+    INDEX IX_Items_Name (Name)
 );
 GO
 
-CREATE TABLE AutomatedGuidedVehicle (
+CREATE TABLE AutomatedGuidedVehicles (
     Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Name NVARCHAR(255) NOT NULL,
     LocationId UNIQUEIDENTIFIER,
     CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
     UpdatedAt DATETIME NULL,
-    FOREIGN KEY (LocationId) REFERENCES Location(Id),
-    INDEX IX_AutomatedGuidedVehicle_Name (Name)
+    FOREIGN KEY (LocationId) REFERENCES Locations(Id),
+    INDEX IX_AutomatedGuidedVehicles_Name (Name)
 );
 GO
 
-CREATE TABLE RequestItem (
+CREATE TABLE OrderItems (
     Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
-    RequestId UNIQUEIDENTIFIER,
-    GoodId UNIQUEIDENTIFIER,
+    OrderId UNIQUEIDENTIFIER,
+    ItemId UNIQUEIDENTIFIER,
     Quantity INT NOT NULL,
     CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
     UpdatedAt DATETIME NULL,
-    FOREIGN KEY (RequestId) REFERENCES Request(Id),
-    FOREIGN KEY (GoodId) REFERENCES Good(Id),
-    INDEX IX_RequestItem_RequestId (RequestId),
-    INDEX IX_RequestItem_GoodId (GoodId)
+    FOREIGN KEY (OrderId) REFERENCES Orders(Id),
+    FOREIGN KEY (ItemId) REFERENCES Items(Id),
+    INDEX IX_OrderItems_OrderId (OrderId),
+    INDEX IX_OrderItems_ItemsId (ItemId)
 );
 GO
 

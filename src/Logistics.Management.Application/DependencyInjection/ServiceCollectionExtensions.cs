@@ -1,5 +1,5 @@
 ﻿using Logistics.Management.Application.AutoMapper;
-using Logistics.Management.Application.Services.Requests;
+using Logistics.Management.Application.Services.Orders;
 using Logistics.Management.Data.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,7 +16,7 @@ namespace Logistics.Management.Application.DependencyInjection
             services.AddDataServices();
 
             // Services
-            services.AddScoped<IRequestService, RequestService>();
+            services.AddScoped<IOrderService, OrderService>();
         }
     }
 }

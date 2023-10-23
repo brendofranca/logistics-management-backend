@@ -1,4 +1,6 @@
-﻿namespace Logistics.Management.Data.Repositories.Abstractions
+﻿using Microsoft.EntityFrameworkCore.Storage;
+
+namespace Logistics.Management.Data.Repositories.Abstractions
 {
     public interface IUnitOfWork
     {
