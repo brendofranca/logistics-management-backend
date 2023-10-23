@@ -1,6 +1,6 @@
 ﻿namespace Logistics.Management.Application.Responses
 {
-    public record GoodResponse
+    public record RequestResponse
     {
         public Guid Id { get; set; }
     }

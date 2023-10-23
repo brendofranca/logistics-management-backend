@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Logistics.Management.Data\Logistics.Management.Data.csproj" />
+    <ProjectReference Include="..\Logistics.Management.Application\Logistics.Management.Application.csproj" />
   </ItemGroup>
 
 </Project>

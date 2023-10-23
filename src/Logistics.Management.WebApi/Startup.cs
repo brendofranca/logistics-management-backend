@@ -1,6 +1,4 @@
-using Logistics.Management.Data.Context;
-using Logistics.Management.Data.Repositories;
-using Microsoft.EntityFrameworkCore;
+using Logistics.Management.Application.DependencyInjection;
 
 namespace Logistics.Management.WebApi
 {
@@ -17,9 +15,7 @@ namespace Logistics.Management.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>();
-
-            services.AddScoped<RequestRepository>();
+            services.AddApplicationServices();
 
             services.AddControllers();
 

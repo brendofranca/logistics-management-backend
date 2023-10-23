@@ -15,8 +15,4 @@
     <ProjectReference Include="..\Logistics.Management.Data\Logistics.Management.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Requests\" />
-  </ItemGroup>
-
 </Project>

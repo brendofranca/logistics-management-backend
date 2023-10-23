@@ -1,4 +1,4 @@
-using Logistics.Management.Data.Repositories;
+using Logistics.Management.Application.Services.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Logistics.Management.WebApi.Controllers
@@ -7,16 +7,16 @@ namespace Logistics.Management.WebApi.Controllers
     [Route("[controller]")]
     public class RequestController : ControllerBase
     {
-        private readonly RequestRepository _requestRepository;
+        private readonly IRequestService _requestService;
 
-        public RequestController(RequestRepository requestRepository)
+        public RequestController(IRequestService requestService)
         {
-            _requestRepository = requestRepository;
+            _requestService = requestService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken) =>
-            Ok(await _requestRepository.GetAllAsync(cancellationToken));
+            Ok(await _requestService.GetAllRequests(cancellationToken));
 
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetById(Guid id, CancellationToken cancellationToken) =>
