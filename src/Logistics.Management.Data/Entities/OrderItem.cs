@@ -8,8 +8,8 @@ namespace Logistics.Management.Data.Entities
         public Guid? ItemId { get; set; }
         public int Quantity { get; set; }
 
-        public virtual Item? Item { get; set; }
-        public virtual Order? Order { get; set; }
+        public virtual Item Item { get; set; }
+        public virtual Order Order { get; set; }
 
         // EF
         protected OrderItem()

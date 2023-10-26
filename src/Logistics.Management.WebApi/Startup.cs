@@ -1,4 +1,5 @@
 using Logistics.Management.Application.DependencyInjection;
+using System.Reflection;
 
 namespace Logistics.Management.WebApi
 {
@@ -22,6 +23,8 @@ namespace Logistics.Management.WebApi
             services.AddEndpointsApiExplorer();
 
             services.AddSwaggerGen();
+
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
         }
 
         public void Configure(IApplicationBuilder app)

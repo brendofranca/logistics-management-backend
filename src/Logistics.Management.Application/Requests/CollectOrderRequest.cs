@@ -2,13 +2,12 @@
 
 namespace Logistics.Management.Application.Requests
 {
-    public record OrderItemRequest
+    public record CollectOrderRequest
     {
         [Required]
-        public Guid ItemId { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
-        [Range(1, 10)]
-        public int Quantity { get; set; }
+        public Guid AvgId { get; set; }
     }
 }

@@ -6,6 +6,6 @@ namespace Logistics.Management.Application.AutoMapper
 {
     public class MappingProfile : Profile
     {
-        public MappingProfile() => CreateMap<Order, OrderResponse>();
+        public MappingProfile() => CreateMap<Order, RequestOrderResponse>();
     }
 }

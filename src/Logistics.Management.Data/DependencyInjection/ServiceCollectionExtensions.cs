@@ -3,6 +3,7 @@ using Logistics.Management.Data.Repositories.Avgs;
 using Logistics.Management.Data.Repositories.Items;
 using Logistics.Management.Data.Repositories.Locations;
 using Logistics.Management.Data.Repositories.Orders;
+using Logistics.Management.Data.Repositories.Status;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Logistics.Management.Data.DependencyInjection
@@ -21,6 +22,7 @@ namespace Logistics.Management.Data.DependencyInjection
             services.AddScoped<IAvgRepository, AvgRepository>();
             services.AddScoped<ILocationRepository, LocationRepository>();
             services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<IStatusEnumRepository, StatusEnumRepository>();
         }
     }
 }

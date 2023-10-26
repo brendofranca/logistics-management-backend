@@ -4,8 +4,9 @@ namespace Logistics.Management.Data.Entities
 {
     public partial class OrderStatus : Entity
     {
-        public int? StatusId { get; set; }
+        public int StatusId { get; set; }
         public Guid? OrderId { get; set; }
+        public int? TimeSpent { get; set; }
 
         public virtual Order? Order { get; set; }
         public virtual StatusEnum? Status { get; set; }
@@ -19,6 +20,13 @@ namespace Logistics.Management.Data.Entities
             Id = id;
             OrderId = orderId;
             StatusId = statusId;
+        }
+
+        public void CalculateTimeSpent()
+        {
+            var timeDifference = DateTime.UtcNow - CreatedAt;
+
+            TimeSpent = (int)timeDifference.TotalMinutes;
         }
     }
 }

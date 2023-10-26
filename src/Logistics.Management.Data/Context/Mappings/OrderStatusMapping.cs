@@ -16,6 +16,8 @@ namespace Logistics.Management.Data.Context.Mappings
 
             builder.Property(e => e.UpdatedAt).HasColumnType("datetime");
 
+            builder.Property(e => e.TimeSpent);
+
             builder.HasOne(d => d.Order).WithMany(p => p.OrderStatuses).HasForeignKey(d => d.OrderId).HasConstraintName("FK_OrderStatus_Order");
 
             builder.HasOne(d => d.Status).WithMany(p => p.OrderStatuses).HasForeignKey(d => d.StatusId).HasConstraintName("FK_OrderStatus_StatusEnum");

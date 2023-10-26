@@ -2,9 +2,9 @@
 
 namespace Logistics.Management.Application.Requests
 {
-    public record ProcessOrderRequest
+    public record SendOrderRequest
     {
         [Required]
-        public List<Guid> RequestIds { get; set; }
+        public Guid Id { get; set; }
     }
 }

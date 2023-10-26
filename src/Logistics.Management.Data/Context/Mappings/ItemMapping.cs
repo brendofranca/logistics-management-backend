@@ -1,5 +1,4 @@
 ﻿using Logistics.Management.Data.Entities;
-using Logistics.Management.Data.Entities.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

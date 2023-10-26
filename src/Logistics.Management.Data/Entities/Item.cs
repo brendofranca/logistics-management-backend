@@ -9,7 +9,7 @@ namespace Logistics.Management.Data.Entities
 
         public Guid? LocationId { get; set; }
 
-        public virtual Location? Location { get; set; }
+        public virtual Location Location { get; set; }
         public virtual ICollection<OrderItem>? OrderItems { get; set; }
 
         // EF

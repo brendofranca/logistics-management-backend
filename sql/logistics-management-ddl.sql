@@ -20,6 +20,7 @@ CREATE TABLE OrderStatus (
 	OrderId UNIQUEIDENTIFIER,
     CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
     UpdatedAt DATETIME NULL,
+	TimeSpent INT NULL 
 );
 GO
 

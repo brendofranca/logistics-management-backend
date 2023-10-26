@@ -1,5 +1,4 @@
 ﻿using Logistics.Management.Data.Context.Abstractions;
-using Logistics.Management.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.Data.Common;
@@ -39,12 +38,17 @@ namespace Logistics.Management.Data.Context
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Property("UpdatedAt").CurrentValue = DateTime.UtcNow;
+                        entry.Property("CreatedAt").CurrentValue = DateTime.UtcNow;
                         break;
 
                     case EntityState.Modified:
                         entry.Property("UpdatedAt").CurrentValue = DateTime.UtcNow;
                         entry.Property("CreatedAt").IsModified = false;
+                        if (entry.Entity.GetType().GetProperty("TimeSpent") != null)
+                        {
+                            var timeSpent = DateTime.UtcNow - (DateTime)entry.OriginalValues["CreatedAt"];
+                            entry.Property("TimeSpent").CurrentValue = (int)timeSpent.TotalMinutes;
+                        }
                         break;
                 }
             }
