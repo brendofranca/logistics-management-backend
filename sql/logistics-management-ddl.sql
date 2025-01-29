@@ -1,0 +1,102 @@
+--DDL Script
+
+CREATE DATABASE [logistics-management];
+GO
+
+USE [logistics-management];
+GO
+
+BEGIN TRANSACTION
+GO
+
+CREATE TABLE StatusEnum (
+    Id INT PRIMARY KEY,
+    StatusName NVARCHAR(255) NOT NULL
+);
+
+CREATE TABLE OrderStatus (
+    Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    StatusId INT,
+	OrderId UNIQUEIDENTIFIER,
+    CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
+    UpdatedAt DATETIME NULL,
+	TimeSpent INT NULL 
+);
+GO
+
+CREATE TABLE Orders (
+    Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    Description NVARCHAR(255) NOT NULL,
+    OrderStatusId UNIQUEIDENTIFIER,
+    CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
+    UpdatedAt DATETIME NULL,   
+    INDEX IX_Order_Description (Description)
+);
+GO
+
+ALTER TABLE OrderStatus
+ADD CONSTRAINT FK_OrderStatus_StatusEnum
+FOREIGN KEY (StatusId)
+REFERENCES StatusEnum(Id);
+GO
+
+ALTER TABLE OrderStatus
+ADD CONSTRAINT FK_OrderStatus_Order
+FOREIGN KEY (OrderId)
+REFERENCES Orders(Id);
+GO
+
+ALTER TABLE Orders
+ADD CONSTRAINT FK_Orders_OrderStatus
+FOREIGN KEY (OrderStatusId)
+REFERENCES OrderStatus(Id);
+GO
+
+CREATE TABLE Locations (
+    Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    LocationX DECIMAL(10, 2) NOT NULL,
+    LocationY DECIMAL(10, 2) NOT NULL,
+    CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
+    UpdatedAt DATETIME NULL  
+);
+GO
+
+CREATE TABLE Items (
+    Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    Name NVARCHAR(255) NOT NULL,
+    LocationId UNIQUEIDENTIFIER,
+    Quantity INT NOT NULL,
+    CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
+    UpdatedAt DATETIME NULL,
+    FOREIGN KEY (LocationId) REFERENCES Locations(Id),
+    INDEX IX_Items_Name (Name)
+);
+GO
+
+CREATE TABLE AutomatedGuidedVehicles (
+    Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    Name NVARCHAR(255) NOT NULL,
+    LocationId UNIQUEIDENTIFIER,
+    CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
+    UpdatedAt DATETIME NULL,
+    FOREIGN KEY (LocationId) REFERENCES Locations(Id),
+    INDEX IX_AutomatedGuidedVehicles_Name (Name)
+);
+GO
+
+CREATE TABLE OrderItems (
+    Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    OrderId UNIQUEIDENTIFIER,
+    ItemId UNIQUEIDENTIFIER,
+    Quantity INT NOT NULL,
+    CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
+    UpdatedAt DATETIME NULL,
+    FOREIGN KEY (OrderId) REFERENCES Orders(Id),
+    FOREIGN KEY (ItemId) REFERENCES Items(Id),
+    INDEX IX_OrderItems_OrderId (OrderId),
+    INDEX IX_OrderItems_ItemsId (ItemId)
+);
+GO
+
+COMMIT;
+GO
